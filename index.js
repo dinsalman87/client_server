@@ -9,7 +9,7 @@ import path from "path";
 import { login, signup, sendForgotPasswordEmail } from "./mongo_logic/users.js";
 import { getTreatments, addNewTreatment, deleteTreatment, editTreatment } from "./mongo_logic/treatments.js";
 
-// git token = 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
+// git token = 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
 
 const app = express();
 
