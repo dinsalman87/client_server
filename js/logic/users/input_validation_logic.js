@@ -1,6 +1,5 @@
 
 function isValidName(name) {
-    // check that the name is contains only letters
     if (name.length == 0) {
         return false
     }
@@ -44,7 +43,7 @@ function isValidPassword(password) {
 }
 
 function isValidPasswords(password, passwordConfirm) {
-    // check for valid password, and compare between them.
+    // check for a valid password, and compare between them.
     if (password.length == 0 && passwordConfirm.length == 0 || password != passwordConfirm) {
         return false
     }
