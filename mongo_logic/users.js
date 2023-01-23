@@ -185,13 +185,13 @@ const sendEmail = async (recipientEmail, subject, message) => {
       port: 587,
       secure: false,
       auth: {
-        user: "furmanshahar@gmail.com",
-        pass: "lygpoznivkcmgiml",
+        user: "dinsalman87@gmail.com",
+        pass: "DinSalman1403",
       },
     });
 
     let info = await transporter.sendMail({
-      from: "furmanshahar@gmail.com",
+      from: "dinsalman87@gmail.com",
       to: recipientEmail,
       subject: subject,
       text: message,
