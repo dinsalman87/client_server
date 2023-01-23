@@ -5,7 +5,6 @@ import fetch from "node-fetch";
 import bcrypt from "bcrypt";
 
 export const login = async (req, res) => {
-  console.log(`Controllers: Users.login() - body = ${JSON.stringify(req.body)}`);
 
   const invalidMessage = "User or password are invalid.";
   const loginData = req.body;
@@ -13,7 +12,6 @@ export const login = async (req, res) => {
     const usersWithSameEmails = await User.find({ email: loginData.email }).limit(1);
     const isUserAlreadyExist = usersWithSameEmails.length > 0;
     if (!isUserAlreadyExist) {
-      console.log("login !isUserAlreadyExist: invalidMessage = " + invalidMessage);
       res.status(404).send(invalidMessage);
       return;
     }
@@ -22,8 +20,6 @@ export const login = async (req, res) => {
     const isPasswordCorrect = await compare(loginData.password, savedPassword);
 
     if (!isPasswordCorrect && loginData.password !== savedPassword) {
-      console.log("login !isPasswordCorrect: invalidMessage = " + invalidMessage);
-
       res.status(404).send(invalidMessage);
       return;
     }
@@ -33,13 +29,11 @@ export const login = async (req, res) => {
       .status(200)
       .json({ message: "Login Successfully", userFullName: userFullName, encryptedPassword: savedPassword });
   } catch (err) {
-    console.log("login catch: err.message = " + err.message);
     res.status(500).send(err.message);
   }
 };
 
 export const signup = async (req, res) => {
-  console.log(`Controllers: Users.signup() - body = ${JSON.stringify(req.body)}`);
   const userData = req.body.user;
   const recaptcha = req.body.recaptcha;
 
@@ -76,8 +70,6 @@ export const signup = async (req, res) => {
 };
 
 async function validateRecaptcha(recaptcha, remoteAddress) {
-  console.log("validateRecaptcha: recaptcha = " + recaptcha + ", remoteAddress = " + remoteAddress);
-
   try {
     const query = stringify({
       secret: "6LfNvhokAAAAAPvWCdjd62FGzuV9KNFCwx7hrnu-",
@@ -89,8 +81,6 @@ async function validateRecaptcha(recaptcha, remoteAddress) {
     return await fetch(verifyUrl)
       .then((res) => res.json())
       .then((data) => {
-        console.log("validateRecaptcha: data = " + JSON.stringify(data));
-
         return data.success;
       });
   } catch (err) {
@@ -102,10 +92,8 @@ export const sendForgotPasswordEmail = async (req, res) => {
   try {
     const email = req.body.email;
 
-    console.log("sendForgotPasswordEmail: email = " + email);
     const user = await User.findOne({ email: email });
     if (user == null) {
-      console.log("sendForgotPasswordEmail: user not found");
       res.status(404).send("Email not found...");
       return;
     }
@@ -114,7 +102,6 @@ export const sendForgotPasswordEmail = async (req, res) => {
     user.password = await encrypte(newPassword);
     await user.save();
 
-    console.log("decryptedPassword = " + newPassword);
     await sendEmail(email, "Forgot Password", "Your password is " + newPassword);
 
     res.status(200).send("Email with password sent...");
@@ -197,7 +184,6 @@ const sendEmail = async (recipientEmail, subject, message) => {
       text: message,
     });
 
-    console.log(`Message sent: ${info.messageId}`);
   } catch (err) {
     console.log(`UtilMailer.sendEmail() - ${err.message}`);
   }
