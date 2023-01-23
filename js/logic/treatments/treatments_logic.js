@@ -87,7 +87,6 @@ const addNewTreatment = async (newTreatment) => {
     const response = await fetch(url, request)
 
     location.reload()
-    console.log("sendHttpRequest: response: " + JSON.stringify(response))
     return response
 }
 
@@ -105,7 +104,6 @@ const editTreatment = async (newTreatment) => {
     const response = await fetch(url, request)
 
     location.reload()
-    console.log("sendHttpRequest: response: " + JSON.stringify(response))
     return response
 }
 
@@ -151,7 +149,7 @@ const deleteTreatment = async (treatmentNumber) => {
 
     const response = await fetch(url, request)
     location.reload()
-    console.log("sendHttpRequest: response: " + JSON.stringify(response))
+
     return response
 }
 
