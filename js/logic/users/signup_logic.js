@@ -35,25 +35,21 @@ function validateInputs(firstName, lastName, email, password, passwordConfirm) {
 
     clearBorders()
     if (!isValidName(firstName)) {
-        console.log("First name is invalid - " + firstName)
         signupForm.firstName.style.borderColor = 'red';
         isValid = false;
     }
 
     if (!isValidName(lastName)) {
-        console.log("Last name is invalid - " + lastName)
         signupForm.lastName.style.borderColor = 'red';
         isValid = false;
     }
 
     if (!isValidEmail(email)) {
-        console.log("Email is invalid - " + email)
         signupForm.emailAddress.style.borderColor = 'red';
         isValid = false;
     }
 
     if (!isValidPasswords(password, passwordConfirm) || !isValidPassword(passwordConfirm) || !isValidPassword(password)) {
-        console.log("Passwords are invalid - " + password + " , " + passwordConfirm)
         signupForm.password.style.borderColor = 'red';
         signupForm.passwordConfirm.style.borderColor = 'red';
         isValid = false;
