@@ -1,5 +1,4 @@
 const login = async (email, password) => {
-  console.log("login: email = " + email + ", password = " + password);
 
   const url = "/login";
 
@@ -10,9 +9,8 @@ const login = async (email, password) => {
   const response = await sendHttpRequest(url, "POST", user);
 
   const responseJson = await response.json();
-  console.log(responseJson);
+
   const userFullName = responseJson.userFullName;
-  console.log("LOGIN - User name = " + userFullName);
 
   localStorage.setItem("userFullName", userFullName);
   localStorage.setItem("password", responseJson.encryptedPassword);
@@ -22,7 +20,6 @@ const login = async (email, password) => {
 };
 
 const signup = async (user, recaptcha) => {
-  console.log("signup");
 
   const url = "/sign-up";
 
@@ -33,11 +30,9 @@ const signup = async (user, recaptcha) => {
   const response = await sendHttpRequest(url, "POST", data);
 
   const responseJson = await response.json();
-  console.log("responseJson: " + JSON.stringify(responseJson));
 
   const isSuccess = response.status === 200;
 
-  console.log("isSuccess = " + isSuccess);
   if (isSuccess) {
     location.href = "login";
   }
@@ -49,7 +44,6 @@ const signup = async (user, recaptcha) => {
 };
 
 const resetPassword = async (email) => {
-  console.log("api: users.resetPassword - email: " + email);
   const url = "/forgot-password";
 
   const response = await sendHttpRequest(url, "POST", { email: email });
@@ -70,6 +64,5 @@ const sendHttpRequest = async (url, method, body) => {
 
   const response = await fetch(url, request);
 
-  console.log("sendHttpRequest: response: " + JSON.stringify(response));
   return response;
 };
