@@ -8,22 +8,21 @@ forgotPasswordBtn.addEventListener("click", (e) => {
 
   const emailAddress = forgotPasswordEmailInput.value;
 
-  console.log("emailAddress = " + emailAddress);
   var isValid = isValidEmail(emailAddress);
 
   if (!isValid) {
-    showMessage("Invalid Email, Please try again", 2000);
+    showMessage("Invalid Email, Please try again", 3000);
     return;
   }
 
   const isSuccess = resetPassword(emailAddress);
 
   if (!isSuccess) {
-    showMessage("Email not found, Please try again", 2000);
+    showMessage("Email not found, Please try again", 3000);
     return;
   }
 
-  showMessage("Mail Sent Successfully, Check your password", 2000);
+  showMessage("Mail Sent Successfully, Check your inbox for new password!", 2000);
 
   setTimeout(() => {
     location.href = "/login";
@@ -31,7 +30,6 @@ forgotPasswordBtn.addEventListener("click", (e) => {
 });
 
 function showMessage(messageText, delay) {
-  console.log(message, delay);
   message.innerText = messageText;
 
   clearTimeout();
