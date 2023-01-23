@@ -10,15 +10,12 @@ const loginMessage = document.getElementById('login-message')
 loginBtn.addEventListener('click', (e) => {
     e.preventDefault()
 
-    console.log("click login")
     async function handleLogin() {
         const email = emailInput.value
         const password = passwordInput.value
 
-
-        console.log("handleLogin: " + email + " " + password)
         if (!isValidEmail(email) || !isValidPassword(password)) {
-            showMessage("Invalid email or password", 2000)
+            showMessage("Invalid email or password", 3000)
             return
         }
     
@@ -39,7 +36,6 @@ loginBtn.addEventListener('click', (e) => {
 })
 
 function showMessage(messageText, delay) {
-    console.log(messageText, delay)
     loginMessage.innerText = messageText
 
     clearTimeout()
